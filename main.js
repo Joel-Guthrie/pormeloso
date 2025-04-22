@@ -26,6 +26,11 @@ document.addEventListener("DOMContentLoaded", function() {
         // Mostrar la pantalla de la carta abierta
         openLetterScreen.classList.add("active");
         
+        // Asegurarse de que el scroll esté al inicio
+        openLetterScreen.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        document.body.scrollTop = 0;
+        
         // Añadir efecto de aparición gradual
         const vintageLetterContainer = document.querySelector(".vintage-letter-container");
         vintageLetterContainer.style.opacity = "0";
@@ -35,6 +40,11 @@ document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
           vintageLetterContainer.style.opacity = "1";
           vintageLetterContainer.style.transform = "translateY(0)";
+          
+          // Asegurarse nuevamente de que el scroll esté al inicio
+          openLetterScreen.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+          document.body.scrollTop = 0;
         }, 100);
         
       }, 2500); // 2.5 segundos después de que se abre el sobre
