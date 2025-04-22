@@ -1,0 +1,369 @@
+/* Estilos generales */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Cormorant Garamond", serif;
+  background-color: white;
+  color: #333;
+  line-height: 1.6;
+  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  transition: background-color 1.5s ease;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+/* Pantallas */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1s ease, visibility 1s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1;
+}
+
+/* Pantalla inicial */
+#initial-screen {
+  background-color: #f5f5f5;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0b88b' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+.red-button {
+  background-color: #8b0000;
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  letter-spacing: 1px;
+  border: 2px solid #5a0000;
+}
+
+.red-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background-color: #a00000;
+}
+
+.red-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Pantalla de la carta */
+#letter-screen {
+  background-color: #f5f5f5;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0b88b' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  transition: background-color 2s ease;
+}
+
+/* Sobre y carta */
+.envelope-container {
+  width: 90%;
+  max-width: 350px;
+  height: 250px;
+  perspective: 1000px;
+  margin: 0 auto;
+}
+
+.envelope {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s ease, opacity 1s ease;
+}
+
+.envelope-flap {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  top: 0;
+  background-color: #e8d9b0;
+  border: 2px solid #c9b27d;
+  border-radius: 0 0 20px 20px;
+  transform-origin: top;
+  transform: rotateX(0deg);
+  transition: transform 1.5s ease;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.wax-seal {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #8b0000;
+  border-radius: 50%;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.wax-seal::before {
+  content: "A";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f0e0c0;
+  font-family: "Tangerine", cursive;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.envelope-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #e8d9b0;
+  border: 2px solid #c9b27d;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.letter {
+  width: 90%;
+  height: 90%;
+  background-color: #f5e8c9;
+  border-radius: 5px;
+  transform: translateY(100%);
+  transition: transform 1.5s ease;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.letter-content {
+  padding: 20px;
+  height: 100%;
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity 1s ease;
+  font-size: 0.9rem;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* Estilos para el contenido de la carta */
+.letter-content p, .vintage-letter p {
+  margin-bottom: 15px;
+  color: #3a2a1d;
+  text-align: justify;
+  line-height: 1.7;
+}
+
+.greeting {
+  font-family: "Tangerine", cursive;
+  font-size: 2.5rem;
+  color: #8b0000;
+  text-align: center;
+  margin-bottom: 20px;
+  font-weight: bold;
+}
+
+.quote {
+  font-style: italic;
+  color: #7b5c3d;
+  text-align: center;
+  margin: 15px 0;
+  font-size: 1.1rem;
+}
+
+.closing {
+  font-family: "Tangerine", cursive;
+  font-size: 1.8rem;
+  text-align: right;
+  margin-top: 30px;
+  color: #8b0000;
+  font-weight: bold;
+}
+
+/* Estilos para la carta abierta */
+.envelope.open .envelope-flap {
+  transform: rotateX(180deg);
+}
+
+.envelope.open .wax-seal {
+  opacity: 0;
+}
+
+.envelope.open .letter {
+  transform: translateY(0);
+}
+
+.envelope.open .letter-content {
+  opacity: 1;
+}
+
+/* Pantalla de carta abierta */
+#open-letter-screen {
+  background-color: #f5f5f5;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0b88b' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.vintage-letter-container {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.vintage-letter {
+  background-color: #f5e8c9;
+  padding: 40px;
+  border-radius: 5px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto;
+  background-image: 
+    linear-gradient(to right, rgba(0,0,0,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0,0,0,0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: 1px solid #d0b88b;
+}
+
+.vintage-letter::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23d0b88b' fill-opacity='0.1' fill-rule='evenodd'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Elementos decorativos */
+.letter-header, .letter-footer {
+  position: relative;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.letter-footer {
+  margin-top: 30px;
+  height: 60px;
+}
+
+.quill {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 60px;
+  height: 60px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 2L10 12M8.5 14.5L2 22M17 6L14 3M14 8L11 5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  transform: rotate(-15deg);
+}
+
+.ink-splatter {
+  position: absolute;
+  bottom: 0;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M30,50 Q40,20 50,40 Q60,10 70,30 Q80,50 60,60 Q70,80 50,70 Q30,80 40,60 Q20,50 30,50 Z' fill='%233a2a1d' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.wax-seal-bottom {
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: #8b0000;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.wax-seal-bottom::before {
+  content: "A";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #f0e0c0;
+  font-family: "Tangerine", cursive;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .envelope-container {
+    max-width: 300px;
+    height: 220px;
+  }
+
+  .letter-content, .vintage-letter {
+    font-size: 0.9rem;
+    padding: 15px;
+  }
+
+  .greeting {
+    font-size: 2rem;
+  }
+
+  .closing {
+    font-size: 1.5rem;
+  }
+  
+  .vintage-letter {
+    padding: 25px;
+  }
+}
+
+@media (min-width: 601px) {
+  .envelope-container {
+    max-width: 400px;
+    height: 280px;
+  }
+
+  .letter-content {
+    font-size: 1rem;
+  }
+}
